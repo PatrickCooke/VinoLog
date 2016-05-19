@@ -12,6 +12,11 @@
 		43FCFE091CEE218D00122087 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43FCFE071CEE218D00122087 /* Main.storyboard */; };
 		43FCFE0B1CEE218D00122087 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43FCFE0A1CEE218D00122087 /* Assets.xcassets */; };
 		43FCFE0E1CEE218D00122087 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43FCFE0C1CEE218D00122087 /* LaunchScreen.storyboard */; };
+		43FCFE161CEE23E300122087 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FCFE151CEE23E300122087 /* LoginManager.swift */; };
+		43FCFE181CEE253600122087 /* WineEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FCFE171CEE253600122087 /* WineEntry.swift */; };
+		43FCFE1B1CEE2E1900122087 /* WineCellarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FCFE1A1CEE2E1900122087 /* WineCellarViewController.swift */; };
+		43FCFE1D1CEE3E7300122087 /* WineDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FCFE1C1CEE3E7300122087 /* WineDetailViewController.swift */; };
+		FF363F3B363F364FFEBDFD5C /* Pods_VineLog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E5B17F1F20F4BF3910B46EF /* Pods_VineLog.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +27,13 @@
 		43FCFE0A1CEE218D00122087 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		43FCFE0D1CEE218D00122087 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		43FCFE0F1CEE218D00122087 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		43FCFE151CEE23E300122087 /* LoginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
+		43FCFE171CEE253600122087 /* WineEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WineEntry.swift; sourceTree = "<group>"; };
+		43FCFE1A1CEE2E1900122087 /* WineCellarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WineCellarViewController.swift; sourceTree = "<group>"; };
+		43FCFE1C1CEE3E7300122087 /* WineDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WineDetailViewController.swift; sourceTree = "<group>"; };
+		6E5B17F1F20F4BF3910B46EF /* Pods_VineLog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VineLog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F518A9915A866A08E83748BA /* Pods-VineLog.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VineLog.release.xcconfig"; path = "Pods/Target Support Files/Pods-VineLog/Pods-VineLog.release.xcconfig"; sourceTree = "<group>"; };
+		FAE979D3D111164F039F7E24 /* Pods-VineLog.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VineLog.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VineLog/Pods-VineLog.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF363F3B363F364FFEBDFD5C /* Pods_VineLog.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +53,8 @@
 			children = (
 				43FCFE021CEE218D00122087 /* VineLog */,
 				43FCFE011CEE218D00122087 /* Products */,
+				4579F006449CA976ED5BE54D /* Pods */,
+				C4AFAF1CDFF9EAD360368349 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,12 +71,41 @@
 			children = (
 				43FCFE031CEE218D00122087 /* AppDelegate.swift */,
 				43FCFE051CEE218D00122087 /* ViewController.swift */,
+				43FCFE1A1CEE2E1900122087 /* WineCellarViewController.swift */,
+				43FCFE1C1CEE3E7300122087 /* WineDetailViewController.swift */,
+				43FCFE191CEE253A00122087 /* Model */,
+				43FCFE151CEE23E300122087 /* LoginManager.swift */,
 				43FCFE071CEE218D00122087 /* Main.storyboard */,
 				43FCFE0A1CEE218D00122087 /* Assets.xcassets */,
 				43FCFE0C1CEE218D00122087 /* LaunchScreen.storyboard */,
 				43FCFE0F1CEE218D00122087 /* Info.plist */,
 			);
 			path = VineLog;
+			sourceTree = "<group>";
+		};
+		43FCFE191CEE253A00122087 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				43FCFE171CEE253600122087 /* WineEntry.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		4579F006449CA976ED5BE54D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FAE979D3D111164F039F7E24 /* Pods-VineLog.debug.xcconfig */,
+				F518A9915A866A08E83748BA /* Pods-VineLog.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		C4AFAF1CDFF9EAD360368349 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6E5B17F1F20F4BF3910B46EF /* Pods_VineLog.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +115,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 43FCFE121CEE218D00122087 /* Build configuration list for PBXNativeTarget "VineLog" */;
 			buildPhases = (
+				69030CF521654697F347C809 /* 📦 Check Pods Manifest.lock */,
 				43FCFDFC1CEE218D00122087 /* Sources */,
 				43FCFDFD1CEE218D00122087 /* Frameworks */,
 				43FCFDFE1CEE218D00122087 /* Resources */,
+				83D709A026494A27C3735BAA /* 📦 Embed Pods Frameworks */,
+				CB29BF6AAF02CAB9DFFA181A /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -131,13 +178,65 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		69030CF521654697F347C809 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		83D709A026494A27C3735BAA /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VineLog/Pods-VineLog-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CB29BF6AAF02CAB9DFFA181A /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VineLog/Pods-VineLog-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		43FCFDFC1CEE218D00122087 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43FCFE1D1CEE3E7300122087 /* WineDetailViewController.swift in Sources */,
 				43FCFE061CEE218D00122087 /* ViewController.swift in Sources */,
+				43FCFE1B1CEE2E1900122087 /* WineCellarViewController.swift in Sources */,
 				43FCFE041CEE218D00122087 /* AppDelegate.swift in Sources */,
+				43FCFE161CEE23E300122087 /* LoginManager.swift in Sources */,
+				43FCFE181CEE253600122087 /* WineEntry.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,6 +349,7 @@
 		};
 		43FCFE131CEE218D00122087 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FAE979D3D111164F039F7E24 /* Pods-VineLog.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = VineLog/Info.plist;
@@ -261,6 +361,7 @@
 		};
 		43FCFE141CEE218D00122087 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F518A9915A866A08E83748BA /* Pods-VineLog.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = VineLog/Info.plist;
@@ -289,6 +390,7 @@
 				43FCFE141CEE218D00122087 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
