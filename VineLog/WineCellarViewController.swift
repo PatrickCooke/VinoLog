@@ -87,8 +87,12 @@ class WineCellarViewController: UIViewController, UITableViewDelegate, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        refetchAndReload()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(refetchAndReload), name: "wineSaved", object: nil)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        refetchAndReload()
     }
 
     override func didReceiveMemoryWarning() {

@@ -24,18 +24,9 @@ class WineDetailViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet private weak var wineConsumedPicker   :UIDatePicker!
     @IBOutlet private weak var wineImageView        :UIImageView!
     @IBOutlet private weak var wineRatingSegCtrlr   :UISegmentedControl!
-    @IBOutlet private weak var capturedImage: UIImageView!
     
-    //MARK: - Save File Methods
-    
-    @IBAction private func saveButtonPressed(button: UIButton) {
-        if let image = capturedImage.image {
-            let imagePath = getDocumentForPathForFile(getNewImageFileName())
-            UIImagePNGRepresentation(image)!.writeToFile(imagePath, atomically: true)
-        } else {
-            print("no image to save")
-        }
-    }
+
+    //MARK: - Photo Name Methods
     
     func getNewImageFileName() -> String {
         return NSProcessInfo.processInfo().globallyUniqueString + ".png"
@@ -49,20 +40,13 @@ class WineDetailViewController: UIViewController, UIImagePickerControllerDelegat
     
     //MARK: - Build-In Camera Methods
     
-    @IBAction private func galleryButtonTapped(button: UIBarButtonItem) {
-        print("gallery")
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = .SavedPhotosAlbum //aka the camera roll
-        presentViewController(imagePicker, animated: true, completion: nil)
-    }
-    
     @IBAction private func cameraButtonTapped(button: UIBarButtonItem) {
         print("Camera")
         if UIImagePickerController.isSourceTypeAvailable(.Camera) {
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
             imagePicker.sourceType = .Camera
+            
             presentViewController(imagePicker, animated: true, completion: nil)
         }else{
             print("No Camera")
@@ -70,7 +54,7 @@ class WineDetailViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        capturedImage.image = (info[UIImagePickerControllerOriginalImage] as! UIImage)
+        wineImageView.image = (info[UIImagePickerControllerOriginalImage] as! UIImage)
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -78,25 +62,59 @@ class WineDetailViewController: UIViewController, UIImagePickerControllerDelegat
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
 
+    func rotateImage(image: UIImage) -> UIImage {
+        if (image.imageOrientation == UIImageOrientation.Up ) {
+            return image
+        }
+        
+        UIGraphicsBeginImageContext(image.size)
+        
+        image.drawInRect(CGRect(origin: CGPoint.zero, size: image.size))
+        let copy = UIGraphicsGetImageFromCurrentImageContext()
+        
+        UIGraphicsEndImageContext()
+        
+        return copy
+    }
     
+    //MARK: - 
+    
+    @IBAction private func dismissKeyBoard() {
+        wineCategoryField.resignFirstResponder()
+        wineWineryField.resignFirstResponder()
+        wineVarietalField.resignFirstResponder()
+        wineNameField.resignFirstResponder()
+        wineVintageField.resignFirstResponder()
+    }
     
     //MARK: - Save stuff
     
     @IBAction private func saveWine(button: UIBarButtonItem) {
         guard let name = wineNameField.text else {
-            return}
-        let newWine = WineEntry()
-        newWine.wineName = name
-        newWine.wineVintage = wineVintageField.text
-        newWine.wineVarietal = wineVarietalField.text
-        newWine.wineWinery = wineWineryField.text
-        newWine.wineCategory = wineCategoryField.text
-        newWine.consummedDate = wineConsumedPicker.date
-        newWine.wineRating = wineRatingSegCtrlr.selectedSegmentIndex
+            return
+        }
+        newWine!.wineName = name
+        newWine!.wineVintage = wineVintageField.text
+        newWine!.wineVarietal = wineVarietalField.text
+        newWine!.wineWinery = wineWineryField.text
+        newWine!.wineCategory = wineCategoryField.text
+        newWine!.consummedDate = wineConsumedPicker.date
+        newWine!.wineRating = wineRatingSegCtrlr.selectedSegmentIndex
         //newWine.winePhotoName = wineImageView.image
+        if let image = wineImageView.image {
+            let filename = getNewImageFileName()
+            let imagePath = getDocumentForPathForFile(filename)
+            let imageRotated = rotateImage(image)
+            UIImagePNGRepresentation(imageRotated)!.writeToFile(imagePath, atomically: true)
+//            UIImagePNGRepresentation(image)!.writeToFile(imagePath, atomically: true)
+            newWine!.winePhotoName = filename
+            print("filename:\(newWine!.winePhotoName)")
+        } else {
+            print("no image to save")
+        }
         
         
-        let dataStore = backendless.data.of(newWine.ofClass())
+        let dataStore = backendless.data.of(newWine!.ofClass())
         dataStore.save(newWine, response: { (result) in
             print("Req Saved")
         }) { (fault) in
@@ -111,7 +129,8 @@ class WineDetailViewController: UIViewController, UIImagePickerControllerDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if newWine?.objectId == nil{
+        if newWine?.objectId == nil {
+            newWine = WineEntry()
             wineNameField.text = ""
             wineVintageField.text = ""
             wineVarietalField.text = ""
@@ -120,6 +139,7 @@ class WineDetailViewController: UIViewController, UIImagePickerControllerDelegat
             wineConsumedPicker.date = NSDate()
             wineImageView.image = nil
             wineRatingSegCtrlr.selectedSegmentIndex = 1
+            wineNameField.becomeFirstResponder()
         } else {
             wineNameField.text = newWine!.wineName
             wineVintageField.text = newWine!.wineVintage
@@ -127,8 +147,15 @@ class WineDetailViewController: UIViewController, UIImagePickerControllerDelegat
             wineWineryField.text = newWine!.wineWinery
             wineCategoryField.text = newWine!.wineCategory
             wineConsumedPicker.date = newWine!.consummedDate
-            wineImageView.image = nil
+            if let photo = newWine!.winePhotoName {
+                print("name:\(newWine!.winePhotoName)")
+                print("path:\(getDocumentForPathForFile(photo))")
+                wineImageView.image = UIImage(named: getDocumentForPathForFile(photo))
+            } else {
+                wineImageView.image = nil
+            }
             wineRatingSegCtrlr.selectedSegmentIndex = newWine!.wineRating
+            
         }
  }
 
